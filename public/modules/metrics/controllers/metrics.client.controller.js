@@ -10,8 +10,9 @@ angular.module('metrics').controller('MetricsController', ['$scope', '$statePara
 			// Create new Metric object
 			var metric = new Metrics ({
 				covered: this.covered,
-				loc.lng: this.loc.lng,
-				loc.lat: this.loc.lat,
+				loc: {lng: this.loc.lng,
+							lat: this.loc.lat
+						}
 			});
 
 			// Redirect after save
