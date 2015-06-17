@@ -10,11 +10,13 @@ var mongoose = require('mongoose'),
  * Metric Schema
  */
 var MetricSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Metric name',
-		trim: true
+	covered: {
+		type: Boolean,
+	},
+	// @ToDo: Change to use GeoJSON
+	loc: {
+	  lng: Number,
+	  lat: Number
 	},
 	created: {
 		type: Date,

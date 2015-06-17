@@ -9,7 +9,9 @@ angular.module('metrics').controller('MetricsController', ['$scope', '$statePara
 		$scope.create = function() {
 			// Create new Metric object
 			var metric = new Metrics ({
-				name: this.name
+				covered: this.covered,
+				loc.lng: this.loc.lng,
+				loc.lat: this.loc.lat,
 			});
 
 			// Redirect after save
@@ -17,7 +19,9 @@ angular.module('metrics').controller('MetricsController', ['$scope', '$statePara
 				$location.path('metrics/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.covered = '';
+				$scope.loc.lng = '';
+				$scope.loc.lat = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -25,7 +29,7 @@ angular.module('metrics').controller('MetricsController', ['$scope', '$statePara
 
 		// Remove existing Metric
 		$scope.remove = function(metric) {
-			if ( metric ) { 
+			if ( metric ) {
 				metric.$remove();
 
 				for (var i in $scope.metrics) {
@@ -58,7 +62,7 @@ angular.module('metrics').controller('MetricsController', ['$scope', '$statePara
 
 		// Find existing Metric
 		$scope.findOne = function() {
-			$scope.metric = Metrics.get({ 
+			$scope.metric = Metrics.get({
 				metricId: $stateParams.metricId
 			});
 		};
