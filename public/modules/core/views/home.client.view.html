@@ -1,5 +1,10 @@
+<style>
+.angular-google-map-container { height: 400px; }
+</style>
+
 <section data-ng-controller="HomeController">
 	<h1>CoverChecker</h1>
+	<p>Ouch! Check to see if your injury is covered.</p>
 	<form data-ng-submit="check()" novalidate>
 			<fieldset>
 				<div data-ng-repeat="criterium in criteria">
@@ -17,9 +22,11 @@
 </section>
 
 <script type="text/ng-template" id="yes">
-	<h1>Yes</h1>
+	<h1><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Yes</h1>
+	<p>Here&#39;s where you can go get stitched up:</p>
+	<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
 </script>
 
 <script type="text/ng-template" id="no">
-	<h1 style="color:red;">No</h1>
+	<h1 style="color:red;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> No</h1>
 </script>
