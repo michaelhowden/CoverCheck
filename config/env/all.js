@@ -17,6 +17,8 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 			],
 			js: [
+				'//maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places',
+				//'public/lib/google-map-apis.js',
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js',
 				'public/lib/angular-cookies/angular-cookies.js',
@@ -29,7 +31,7 @@ module.exports = {
 				//'//maps.googleapis.com/maps/api/js',
 				'public/lib/lodash/lodash.js',
 				//'public/lib/angular-google-maps/dist/angular-google-maps.js'
-				'//maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places'
+
 			]
 		},
 		css: [
