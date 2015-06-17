@@ -1,5 +1,9 @@
 <style>
-.angular-google-map-container { height: 400px; }
+#map-canvas {
+	height: 400px;
+	margin: 0px;
+	padding: 0px
+}
 </style>
 
 <section data-ng-controller="HomeController">
@@ -19,12 +23,17 @@
 			</fieldset>
 	</form>
 	<ng-include src="template"></ng-include>
+
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+	<script>
+	//google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
 </section>
 
 <script type="text/ng-template" id="yes">
 	<h1><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Yes</h1>
 	<p>Here&#39;s where you can go get stitched up:</p>
-	<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+	<div id="map-canvas" ng-init="initialize()"></div>
 </script>
 
 <script type="text/ng-template" id="no">

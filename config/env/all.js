@@ -26,9 +26,10 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'//maps.googleapis.com/maps/api/js',
+				//'//maps.googleapis.com/maps/api/js',
 				'public/lib/lodash/lodash.js',
-				'public/lib/angular-google-maps/dist/angular-google-maps.js'
+				//'public/lib/angular-google-maps/dist/angular-google-maps.js'
+				'//maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places'
 			]
 		},
 		css: [
