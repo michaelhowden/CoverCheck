@@ -73,6 +73,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		});
 	}
 ]);
+
 'use strict';
 
 angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
@@ -92,7 +93,6 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 	}
 ]);
 'use strict';
-
 
 angular.module('core').controller('HomeController', ['$scope', '$http', 'Authentication', 'Criteria',
 	function($scope, $http, Authentication, Criteria) {
@@ -123,11 +123,90 @@ angular.module('core').controller('HomeController', ['$scope', '$http', 'Authent
 					} else {
 						$scope.template = 'no';
 					}
-
 			  });
+	  };
 
+		/* Map Functions
+		  Adapted from examples at:
+			https://developers.google.com/maps/documentation/javascript/examples/place-search
+			https://developers.google.com/maps/articles/geolocation
+			*/
 
+		var initialLocation;
+		var map;
+		var infowindow;
+		var wellington = new google.maps.LatLng(-41.29, 174.78);
+
+		$scope.initialize = function() {
+			var browserSupportFlag;
+
+			var myOptions = {
+				zoom: 12,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
+
+			// Try W3C Geolocation (Preferred)
+			if(navigator.geolocation) {
+				browserSupportFlag = true;
+				navigator.geolocation.getCurrentPosition(function(position) {
+					initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+					map.setCenter(initialLocation);
+					placeSearch(initialLocation);
+				}, function() {
+					handleNoGeolocation(browserSupportFlag);
+				}, {timeout:5000});
+			}
+			// Browser doesn't support Geolocation
+			else {
+				browserSupportFlag = false;
+				handleNoGeolocation(browserSupportFlag);
+			}
 		};
+
+		function handleNoGeolocation(errorFlag) {
+			if (errorFlag === true) {
+				alert('Geolocation service failed.');
+				initialLocation = wellington;
+			} else {
+				alert('Your browser does not support geolocation.');
+				initialLocation = wellington;
+			}
+			map.setCenter(initialLocation);
+			placeSearch(initialLocation);
+		}
+
+		function placeSearch(initialLocation) {
+			var request = {
+				location: initialLocation,
+				radius: 10000,
+				types: ['doctor', 'hospital']
+			};
+			infowindow = new google.maps.InfoWindow();
+			var service = new google.maps.places.PlacesService(map);
+			service.nearbySearch(request, callback);
+		}
+
+		function callback(results, status) {
+			if (status === google.maps.places.PlacesServiceStatus.OK) {
+				for (var i = 0; i < results.length; i++) {
+					createMarker(results[i]);
+				}
+			}
+		}
+
+		function createMarker(place) {
+			var placeLoc = place.geometry.location;
+			var marker = new google.maps.Marker({
+				map: map,
+				position: place.geometry.location
+			});
+
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.setContent(place.name);
+				infowindow.open(map, this);
+			});
+		}
 	}
 ]);
 
