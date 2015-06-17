@@ -9,7 +9,8 @@ angular.module('criteria').controller('CriteriaController', ['$scope', '$statePa
 		$scope.create = function() {
 			// Create new Criterium object
 			var criterium = new Criteria ({
-				name: this.name
+				criteria: this.criteria,
+				required_criteria: this.required_criteria
 			});
 
 			// Redirect after save
@@ -17,7 +18,8 @@ angular.module('criteria').controller('CriteriaController', ['$scope', '$statePa
 				$location.path('criteria/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.criteria = '';
+				$scope.required_criteria = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -25,7 +27,7 @@ angular.module('criteria').controller('CriteriaController', ['$scope', '$statePa
 
 		// Remove existing Criterium
 		$scope.remove = function(criterium) {
-			if ( criterium ) { 
+			if ( criterium ) {
 				criterium.$remove();
 
 				for (var i in $scope.criteria) {
@@ -58,7 +60,7 @@ angular.module('criteria').controller('CriteriaController', ['$scope', '$statePa
 
 		// Find existing Criterium
 		$scope.findOne = function() {
-			$scope.criterium = Criteria.get({ 
+			$scope.criterium = Criteria.get({
 				criteriumId: $stateParams.criteriumId
 			});
 		};

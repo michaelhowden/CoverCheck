@@ -6,10 +6,15 @@
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+                    <label class="control-label" for="criteria">Criteria</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="criterium.name" id="name" class="form-control" placeholder="Name" required>
+                        <input type="text" data-ng-model="criterium.criteria" id="criteria" class="form-control" placeholder="Criteria" required>
                     </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="required_criteria">Required Criteria
+                    <input type="checkbox" data-ng-model="criterium.required_criteria" id="required_criteria" class="form-control">
+                </label>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">

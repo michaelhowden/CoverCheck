@@ -10,11 +10,14 @@ var mongoose = require('mongoose'),
  * Criterium Schema
  */
 var CriteriumSchema = new Schema({
-	name: {
+	criteria: {
 		type: String,
 		default: '',
-		required: 'Please fill Criterium name',
+		required: 'Please fill criteria',
 		trim: true
+	},
+	required_criteria: {
+		type: Boolean,
 	},
 	created: {
 		type: Date,
