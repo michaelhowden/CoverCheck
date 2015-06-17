@@ -1,0 +1,19 @@
+<section data-ng-controller="CriteriaController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Criteria</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="criterium in criteria" data-ng-href="#!/criteria/{{criterium._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="criterium.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="criterium.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="criterium.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!criteria.$resolved || criteria.length">
+    	No Criteria yet, why don't you <a href="/#!/criteria/create">create one</a>?
+    </div>
+</section>
