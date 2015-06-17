@@ -72,8 +72,8 @@ exports.delete = function(req, res) {
 /**
  * List of Criteria
  */
-exports.list = function(req, res) { 
-	Criterium.find().sort('-created').populate('user', 'displayName').exec(function(err, criteria) {
+exports.list = function(req, res) {
+	Criterium.find().sort('created').populate('user', 'displayName').exec(function(err, criteria) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -87,7 +87,7 @@ exports.list = function(req, res) {
 /**
  * Criterium middleware
  */
-exports.criteriumByID = function(req, res, next, id) { 
+exports.criteriumByID = function(req, res, next, id) {
 	Criterium.findById(id).populate('user', 'displayName').exec(function(err, criterium) {
 		if (err) return next(err);
 		if (! criterium) return next(new Error('Failed to load Criterium ' + id));
